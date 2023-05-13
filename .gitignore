@@ -1,0 +1,4 @@
+.idea
+*.csv
+go.mod
+go.sum
