@@ -12,10 +12,12 @@ var (
 	asn  = flag.String("asn", "", "get info for specific ASN")
 )
 
+const ipv4dbFile = "GeoLite2-ASN-Blocks-IPv4.csv"
+
 func main() {
 	flag.Parse()
 
-	if err := xgeoip.Init(""); err != nil {
+	if err := xgeoip.Init(ipv4dbFile); err != nil {
 		log.Fatal(err)
 	}
 
