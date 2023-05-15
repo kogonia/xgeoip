@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"log"
 	"net/netip"
 	"os"
 )
@@ -17,6 +18,9 @@ func Init(dbFileName string) error {
 	dbFileName = defaultV4DBFileName
 	if err := parseCsvDB(dbFileName); err != nil {
 		return err
+	}
+	if st.isEmpty() {
+		log.Fatalln("empty maxmind DB")
 	}
 	return nil
 }
@@ -59,4 +63,8 @@ func GetByAddr(ip string) *Info {
 
 func GetByASN(asn string) []*Info {
 	return st.GetByASN(asn)
+}
+
+func GetDB() map[string]*Info {
+	return st.data
 }
